@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--blanc);
+  color: var(--noir);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+
+.hero {
+  text-align: center;
+  padding: 64px 24px 56px;
+  border-radius: 28px;
+  background: var(--blanc);
+  box-shadow: 0 24px 60px -30px rgba(35, 19, 77, 0.35);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--violet);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(56px, 12vw, 112px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.dot {
+  color: var(--corail);
+}
+
+.lead {
+  margin: 0 0 40px;
+  color: var(--gris);
+  font-size: 18px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 20px 48px;
+  border: none;
+  border-radius: 999px;
+  background: var(--blanc);
+  color: var(--blanc);
+  font: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+}
+
+.confirm {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--violet);
+}
+
+.seats {
+  margin: 20px 0 0;
+  color: var(--gris);
+  font-size: 14px;
+}
+
+.agenda {
+  margin-top: 56px;
+}
+
+.agenda h2 {
+  color: var(--navy);
+  font-size: 24px;
+}
+
+.agenda ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda li {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+.time {
+  min-width: 64px;
+  color: var(--violet);
+  font-weight: 700;
+}

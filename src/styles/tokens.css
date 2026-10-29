@@ -1,0 +1,18 @@
+/* Charte Saegus : toujours passer par ces tokens, jamais de couleur en dur. */
+:root {
+  --violet: #5723f3;
+  --lavande: #ebe5fe;
+  --navy: #23134d;
+  --noir: #120a28;
+  --gris: #595468;
+  --gris-clair: #ccc9d3;
+  --blanc: #ffffff;
+  --corail: #f26b43;
+  --ciel: #5acbf0;
+  --jaune: #fde53c;
+
+  /* Bouton d'appel à l'action principal */
+  --cta-bg: var(--violet);
+  --cta-bg-hover: var(--navy);
+  --cta-text: var(--blanc);
+}
