@@ -55,17 +55,16 @@ h1 {
   padding: 20px 48px;
   border: none;
   border-radius: 999px;
-  background: var(--cta-bg);
-  color: var(--cta-text);
+  background: var(--blanc);
+  color: var(--blanc);
   font: inherit;
   font-size: 22px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.15s ease;
 }
 
 .cta:hover {
-  background: var(--cta-bg-hover);
   transform: translateY(-2px);
 }
 
