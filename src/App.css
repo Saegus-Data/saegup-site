@@ -16,23 +16,31 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
   50% { filter: drop-shadow(0 0 18px var(--jaune)) drop-shadow(0 0 6px var(--blanc)); }
 }
 
-.anim-drift { animation: drift 60s linear infinite alternate; }
+.anim-drift { animation: drift 60s ease-in-out infinite alternate; }
 .anim-drift--lent { animation-duration: 90s; }
 @keyframes drift { from { transform: translateX(-80px); } to { transform: translateX(80px); } }
 
-.anim-tram { animation: tram 14s linear infinite; }
-@keyframes tram { from { transform: translateX(-260px); } to { transform: translateX(1620px); } }
+/* L'île flottante : arbres, eau, nuages et montgolfières vivent en continu. */
+.anim-arbre { transform-box: fill-box; transform-origin: 50% 100%; animation: arbre 5s ease-in-out infinite; }
+@keyframes arbre { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
 
-.anim-montgolfiere { animation: montgolfiere 70s linear infinite; }
-@keyframes montgolfiere { from { transform: translateX(-120px); } to { transform: translateX(1720px); } }
-.anim-montgolfiere-flotte { animation: flotte 5s ease-in-out infinite alternate; }
-@keyframes flotte { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+.anim-houle { animation: houle 9s ease-in-out infinite; }
+@keyframes houle { 50% { transform: translateY(10px); } }
 
-.anim-blink { animation: blink 1.6s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0.2; } }
+.anim-courant { stroke-dasharray: 18 26; animation: courant 2.4s linear infinite; }
+@keyframes courant { to { stroke-dashoffset: -44; } }
 
-.anim-pulse { transform-origin: 1340px 170px; animation: pulse 6s ease-in-out infinite; }
-@keyframes pulse { 50% { transform: scale(1.06); } }
+.anim-chute { stroke-dasharray: 26 16; animation: chute 0.8s linear infinite; }
+@keyframes chute { to { stroke-dashoffset: -42; } }
+
+.anim-ecume { transform-box: fill-box; transform-origin: center; animation: ecume 1.3s ease-in-out infinite; }
+@keyframes ecume { 50% { transform: scale(1.18); opacity: 0.7; } }
+
+.anim-scintille { animation: scintille 3.2s ease-in-out infinite; }
+@keyframes scintille { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.9; } }
+
+.anim-ballon { animation: ballon 7s ease-in-out infinite; }
+@keyframes ballon { 50% { transform: translateY(-18px); } }
 
 @media (prefers-reduced-motion: reduce) {
   .scene *, .element.is-new { animation: none !important; }

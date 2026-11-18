@@ -12,8 +12,8 @@
   --jaune: #fde53c;
 
   /* Scène : ciel selon l'ambiance (src/scene/ambiance.ts) */
-  --ciel-jour-haut: #5acbf0;
-  --ciel-jour-bas: #ebe5fe;
+  --ciel-jour-haut: #6cc4ef;
+  --ciel-jour-bas: #c9ecfa;
   --ciel-crepuscule-haut: #5723f3;
   --ciel-crepuscule-bas: #f26b43;
   --ciel-nuit-haut: #120a28;
@@ -25,6 +25,35 @@
   --bitume: #3a3352;
   --trottoir: #ccc9d3;
   --fenetre: #fde53c;
+
+  /* Scène : l'île flottante parisienne */
+  --mer: #7cc5ec;
+  --mer-claire: #c4ebfa;
+  --nuage-ombre: #d6e9f7;
+  --herbe: #7cc24c;
+  --herbe-claire: #a3d964;
+  --herbe-sombre: #4e9a34;
+  --terre: #a86a3c;
+  --terre-sombre: #774425;
+  --racine: #5a3219;
+  --roche: #a7a5ab;
+  --roche-sombre: #73717c;
+  --chemin: #dcb47c;
+  --eau: #4fb0e6;
+  --eau-claire: #bfeaff;
+  --pierre: #ebd2a4;
+  --pierre-sombre: #c49c68;
+  --contour: #5b3d22;
+  --ardoise: #3f62a8;
+  --ardoise-claire: #6c90d6;
+  --vitre: #44609c;
+  --brique: #c4643f;
+  --bronze: #c99a5c;
+  --bronze-sombre: #8d6234;
+  --tronc: #7a4a26;
+  --rose: #f4a3c4;
+  --fleur: #e84a5f;
+  --mauve: #b48be8;
 
   /* Bouton d'appel à l'action principal */
   --cta-bg: var(--violet);
