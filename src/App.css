@@ -23,6 +23,11 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
 .anim-tram { animation: tram 14s linear infinite; }
 @keyframes tram { from { transform: translateX(-260px); } to { transform: translateX(1620px); } }
 
+.anim-montgolfiere { animation: montgolfiere 70s linear infinite; }
+@keyframes montgolfiere { from { transform: translateX(-120px); } to { transform: translateX(1720px); } }
+.anim-montgolfiere-flotte { animation: flotte 5s ease-in-out infinite alternate; }
+@keyframes flotte { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
 .anim-blink { animation: blink 1.6s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0.2; } }
 
