@@ -58,8 +58,8 @@ Le but : un changement **visible au premier coup d'œil** sur la scène, et rien
 
    ⚠️ **Zone toujours visible : y ≥ 280.** La scène remplit l'écran en étant recadrée **par le
    haut** dès que l'écran est plus large que 16:9 (cas courant : barre du navigateur, portable,
-   écran large) : jusqu'à ~260 unités disparaissent en haut. Le haut est aussi couvert par
-   l'encart « Saegus City » (en haut à gauche) et la carte « Dernier ajout » (en haut à droite).
+   écran large) : jusqu'à ~260 unités disparaissent en haut. Le haut droit est aussi couvert
+   par la carte « Dernier ajout ».
    Donc :
    - l'objet demandé par le ticket doit tenir **entièrement entre y = 280 et y = 900** (pour une
      animation : sur toute sa trajectoire) ; y < 280 = décor facultatif seulement ;

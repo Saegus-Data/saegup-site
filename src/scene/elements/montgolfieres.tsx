@@ -37,7 +37,7 @@ function Montgolfieres() {
     <Ile>
       <g className="anim-drift anim-drift--lent">
         <g className="anim-ballon">
-          <Ballon x={120} y={265} r={46} couleurs={[P.ardoiseClaire, P.jaune]} />
+          <Ballon x={275} y={130} r={52} couleurs={[P.ardoiseClaire, P.jaune]} />
         </g>
       </g>
       <g className="anim-drift">

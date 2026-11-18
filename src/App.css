@@ -47,17 +47,6 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
 }
 
 /* ── Habillage ─────────────────────────────────────── */
-.hud {
-  position: absolute; top: 24px; left: 32px;
-  background: color-mix(in srgb, var(--blanc) 85%, transparent);
-  backdrop-filter: blur(6px);
-  border-radius: 16px; padding: 16px 24px;
-}
-.eyebrow { margin: 0; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; font-weight: 700; color: var(--violet); }
-.hud h1 { margin: 4px 0; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 800; color: var(--navy); line-height: 1; }
-.dot { color: var(--corail); }
-.stats { margin: 0; font-weight: 600; color: var(--gris); }
-
 .latest {
   position: absolute; top: 24px; right: 32px; max-width: 360px;
   background: var(--navy); color: var(--blanc);
@@ -110,7 +99,6 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
 .sent { margin: 0; font-size: 1.1rem; font-weight: 600; }
 
 @media (max-width: 640px) {
-  .hud { left: 16px; right: 16px; top: 16px; }
   .latest { display: none; }
   .banner { padding: 10px 16px; }
   .banner-sub { display: none; }

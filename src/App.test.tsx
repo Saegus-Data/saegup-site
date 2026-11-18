@@ -14,10 +14,8 @@ const el = (over: Partial<CityElement>): CityElement => ({
 });
 
 describe('App', () => {
-  it('dessine toute la ville, son compteur et le bandeau', () => {
+  it('dessine toute la ville et le bandeau', () => {
     const { container } = render(<App />);
-    expect(screen.getByRole('heading', { name: /Saegus City/ })).toBeInTheDocument();
-    expect(screen.getByText(`${ELEMENTS.length} éléments`, { exact: false })).toBeInTheDocument();
     for (const e of ELEMENTS) expect(container.querySelector(`[data-element="${e.id}"]`)).not.toBeNull();
     expect(screen.getByRole('region', { name: 'Proposer une idée' })).toBeInTheDocument();
   });
@@ -35,7 +33,6 @@ describe('App', () => {
     const latest = screen.getByRole('complementary', { name: 'Dernier ajout' });
     expect(latest).toHaveTextContent('La fusée');
     expect(latest).toHaveTextContent('BUG-0042 · proposé par Léa');
-    expect(screen.getByText('3 éléments · 2 contributeurs')).toBeInTheDocument();
     expect(container.querySelector('[data-element="fusee"]')).toHaveClass('is-new');
     expect(container.querySelector('[data-element="tour"]')).not.toHaveClass('is-new');
   });
@@ -43,7 +40,6 @@ describe('App', () => {
   it('ville de départ : rien de mis en avant, on invite à construire', () => {
     const { container } = render(<App elements={[el({ id: 'tour', nom: 'La tour' })]} />);
     expect(screen.getByRole('complementary', { name: 'Dernier ajout' })).toHaveTextContent('À vous de construire');
-    expect(screen.getByText('1 éléments · 0 contributeur')).toBeInTheDocument();
     expect(container.querySelector('.is-new')).toBeNull();
   });
 
