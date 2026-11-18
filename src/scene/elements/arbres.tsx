@@ -1,26 +1,28 @@
 import type { CityElement } from '../types';
-import { P } from '../palette';
+import { Arbre, Ile } from '../draw';
 
-const POSITIONS = [70, 340, 640, 980, 1290, 1540];
+/** [x du pied, y du pied, rayon] des arbres du premier rang. */
+const ARBRES = [
+  [205, 442, 34], [382, 442, 28], [325, 468, 34], [640, 482, 32], [1395, 422, 34], [1360, 448, 24],
+  [1112, 518, 32], [788, 668, 28], [842, 670, 32],
+];
 
+/** Les arbres du parc, qui se balancent dans la brise. */
 function Arbres() {
   return (
-    <g>
-      {POSITIONS.map((x, i) => (
-        <g key={x}>
-          <rect x={x - 6} y={840} width={12} height={40} style={{ fill: P.navy }} />
-          <circle cx={x} cy={830} r={30} style={{ fill: i % 2 ? P.feuillageSombre : P.feuillage }} />
-        </g>
+    <Ile>
+      {ARBRES.map(([x, y, r], i) => (
+        <Arbre key={`${x}-${y}`} x={x} y={y} r={r} delai={-i * 0.7} />
       ))}
-    </g>
+    </Ile>
   );
 }
 
 const element: CityElement = {
   id: 'arbres',
   nom: 'Les arbres',
-  layer: 'premier-plan',
-  ajouteLe: '2026-11-01T09:00:00',
+  layer: 'ville',
+  ajouteLe: '2026-11-01T09:19:00',
   Component: Arbres,
 };
 export default element;

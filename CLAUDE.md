@@ -1,6 +1,6 @@
 # Saegus City
 
-Une ville illustrée (SVG plein écran) construite ticket après ticket : chaque idée déposée
+Une île flottante parisienne illustrée (SVG plein écran, animée) construite ticket après ticket : chaque idée déposée
 depuis le bandeau devient un ticket ITSM dans AI Studio, puis un élément de la ville.
 Vite + React + TypeScript, en production sur Vercel (`main`). Les PR se testent dans la VM
 GitHub Codespaces (`.devcontainer/`).
@@ -42,27 +42,38 @@ Le but : un changement **visible au premier coup d'œil** sur la scène, et rien
    export default element;
    ```
 
-2. **Dessiner en SVG** dans le repère de la scène : 1600 × 900, sol à y = 720, avenue de 740
-   à 830, trottoir avant de 830 à 900. Centre de la tour Saegus : x = 800, sommet y = 190 ;
-   toits des immeubles entre y = 320 et 480.
-   Faire **grand et coloré** (la scène est projetée sur un écran) ; ne pas masquer la tour.
+2. **Dessiner en SVG** dans le repère de la scène : 1600 × 900. Le décor est une **île flottante
+   parisienne** posée sur une mer de nuages (coordonnées ci-dessous dans le repère de la scène) :
+   - ciel au-dessus de l'horizon (y = 366), mer en dessous ; mer de nuages en bas (y > 650) ;
+   - pelouse de l'île de x ≈ 240 à 1360, du fond (y ≈ 275) à la pointe avant (x ≈ 795, y ≈ 710) ;
+     socle de terre dessous jusqu'à y ≈ 850 ;
+   - tour Eiffel : x ≈ 650, sommet y ≈ 195, pieds y ≈ 450 ; Notre-Dame : x 855–975, y 240–400 ;
+     Arc de Triomphe : x 1020–1160, y 325–475 ; immeubles haussmanniens vers x 455, 895 et 1170 ;
+   - la Seine descend du fond (x ≈ 1005, y ≈ 355) vers l'avant et tombe en cascades
+     (x ≈ 615 et 995, y 625–775), plus deux cascades latérales (x ≈ 335 et 1245) ;
+   - zones libres bien visibles : de part et d'autre de l'île (x < 230 ou x > 1380, y 280–600).
+   Faire **grand et coloré** (la scène est projetée sur un écran) ; ne pas masquer les monuments.
+   Le décor est dessiné via `<Ile>` (`src/scene/draw.tsx`) dans le repère de l'illustration
+   d'origine ; un nouvel élément peut, lui, utiliser directement le repère de la scène.
 
    ⚠️ **Zone toujours visible : y ≥ 280.** La scène remplit l'écran en étant recadrée **par le
    haut** dès que l'écran est plus large que 16:9 (cas courant : barre du navigateur, portable,
-   écran large) : jusqu'à ~260 unités disparaissent en haut. Le haut est aussi couvert par
-   l'encart « Saegus City » (en haut à gauche) et la carte « Dernier ajout » (en haut à droite).
+   écran large) : jusqu'à ~260 unités disparaissent en haut. Le haut droit est aussi couvert
+   par la carte « Dernier ajout ».
    Donc :
    - l'objet demandé par le ticket doit tenir **entièrement entre y = 280 et y = 900** (pour une
      animation : sur toute sa trajectoire) ; y < 280 = décor facultatif seulement ;
-   - un objet volant (montgolfière, dirigeable, oiseaux…) vole **entre y = 280 et 480**, donc
-     devant les immeubles : plan `ville` (ou plus) ;
-   - un objet posé sur la tour (fusée, enseigne…) qui dépasserait y < 280 : l'agrandir vers le
-     bas ou le placer sur un immeuble plus bas plutôt que de le hisser hors champ.
+   - un objet volant ou céleste (montgolfière, dirigeable, oiseaux, astre…) se place **entre
+     y = 280 et 600**, devant l'île : plan `ville` (ou plus) ;
+   - un objet posé sur un monument (fusée, enseigne…) qui dépasserait y < 280 : l'agrandir vers
+     le bas ou le placer sur un bâtiment plus bas plutôt que de le hisser hors champ.
 
    Les plans se superposent dans l'ordre `ciel → fond → ville → rue → premier-plan` : un objet
-   du plan `ciel` est **caché derrière les bâtiments**, et la zone de ciel libre est presque
-   entièrement hors champ. `ciel` ne sert qu'au décor de fond (ex. ambiance), pas à l'objet
-   demandé par un ticket.
+   du plan `ciel` est **caché derrière l'île**, et la zone de ciel libre est presque entièrement
+   hors champ. `ciel` ne sert qu'au décor de fond (ex. ambiance), pas à l'objet demandé par un
+   ticket. Un effet qui touche toute la scène (lumière, pluie, brouillard…) se met en
+   `premier-plan`, par-dessus tout (ex. calque semi-transparent avec `mixBlendMode`,
+   `pointerEvents: 'none'`).
 3. **Animer** si l'idée s'y prête : ajouter un `@keyframes` + une classe `anim-<id>` dans
    `src/App.css` (section « Scène »). Les animations sont coupées en `prefers-reduced-motion`.
 4. **Couleurs** : uniquement `P.*` (`src/scene/palette.ts`) via `style={{ fill: … }}`, jamais
