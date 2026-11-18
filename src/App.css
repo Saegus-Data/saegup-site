@@ -42,6 +42,15 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
 .anim-ballon { animation: ballon 7s ease-in-out infinite; }
 @keyframes ballon { 50% { transform: translateY(-18px); } }
 
+.anim-soleil-leve { animation: soleil-leve 6s ease-out both; }
+@keyframes soleil-leve { from { transform: translateY(180px); opacity: 0; } }
+.anim-soleil-rayons { transform-box: fill-box; transform-origin: center; animation: soleil-rayons 40s linear infinite; }
+@keyframes soleil-rayons { to { transform: rotate(360deg); } }
+.anim-soleil-faisceaux { animation: soleil-faisceaux 5s ease-in-out infinite; }
+@keyframes soleil-faisceaux { 50% { opacity: 0.55; } }
+.anim-soleil-lueur { animation: soleil-lueur 6s ease-out both; }
+@keyframes soleil-lueur { from { opacity: 0; } }
+
 @media (prefers-reduced-motion: reduce) {
   .scene *, .element.is-new { animation: none !important; }
 }
