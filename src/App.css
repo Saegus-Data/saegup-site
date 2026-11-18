@@ -29,6 +29,12 @@ body { font-family: 'Open Sans', system-ui, sans-serif; background: var(--noir);
 .anim-pulse { transform-origin: 1340px 170px; animation: pulse 6s ease-in-out infinite; }
 @keyframes pulse { 50% { transform: scale(1.06); } }
 
+/* Montgolfière : traverse lentement le ciel de gauche à droite en flottant. */
+.anim-montgolfiere { animation: montgolfiere 80s linear infinite; }
+@keyframes montgolfiere { from { transform: translateX(-680px); } to { transform: translateX(1160px); } }
+.anim-montgolfiere-flotte { animation: flotte 5s ease-in-out infinite alternate; }
+@keyframes flotte { from { transform: translateY(-6px); } to { transform: translateY(0); } }
+
 @media (prefers-reduced-motion: reduce) {
   .scene *, .element.is-new { animation: none !important; }
 }
