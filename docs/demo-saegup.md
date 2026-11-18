@@ -5,13 +5,14 @@ en quelques minutes, un élément de Saegus City, codé par Claude et visible da
 
 ## Mise en service (une fois, avant le jour J)
 
-- [ ] **Catalogue ITSM** : projet « Saegus City » créé dans AI Studio, `github_repo` =
+- [ ] **Catalogue ITSM** : projet « Saegup Site » créé dans AI Studio, `github_repo` =
       `Saegus-Data/saegup-site`, statut GitHub « vérifié ».
 - [ ] **App GitHub** `vibe-office-itsm-loop` installée sur `saegup-site` (aujourd'hui :
       seulement `vibeoffice` et `poc-revue-compte`).
 - [ ] **Routine Claude Code** : `saegup-site` dans les dépôts accessibles à la routine.
-- [ ] **Poste de démo** : `.env.local` avec `ITSM_INTAKE_URL`, `ITSM_INTAKE_SECRET`,
-      `ITSM_PROJECT`, `ITSM_URGENCE=critique`, puis `npm run dev` (http://localhost:5173).
+- [ ] **Vercel** (projet `saegup-site`, Production) : `ITSM_INTAKE_URL`, `ITSM_INTAKE_SECRET`,
+      `ITSM_PROJECT`, `ITSM_URGENCE=critique`, puis redéployer. La salle peut alors proposer
+      depuis son téléphone (QR code vers https://saegup-site.vercel.app).
 - [ ] **Répétition complète** au moins une fois (J-2) avec un ticket de test, puis fermer la PR.
 - [ ] **Pré-chauffage** : ouvrir une VM « Tester » sur la PR de répétition, pour avoir déjà
       autorisé l'App GitHub (écran d'autorisation au premier clic seulement).
@@ -28,7 +29,7 @@ curl -s -X POST https://aistudio.saegus.com/api/itsm/loop/tick \
 
 | Étape | Geste | Durée |
 | --- | --- | --- |
-| 1 | Idée déposée depuis le bandeau (sur le laptop de démo) | 30 s |
+| 1 | Idée déposée depuis le bandeau (téléphone ou laptop) | 30 s |
 | 2 | Tick → synthèse éclair → groupe à décider | ~30 s |
 | 3 | Accepter le groupe sur le kanban / DecisionBoard | 15 s |
 | 4 | Tick → envoi à la routine Claude Code | ~10 s |

@@ -12,6 +12,6 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: reactHooks.configs.recommended.rules,
   },
-  // Code serveur : config Vite (middleware /api/idea).
-  { files: ['vite.config.ts'], languageOptions: { globals: globals.node } },
+  // Code serveur : fonction Vercel et config Vite (middleware /api/idea).
+  { files: ['api/**/*.ts', 'vite.config.ts'], languageOptions: { globals: globals.node } },
 );

@@ -13,8 +13,8 @@ npm run dev        # http://localhost:5173
 ```
 
 Qualité : `npm run lint`, `npm run typecheck`, `npm test -- --coverage` (cliquet à 100 %).
-Pas d'hébergement : la démo tourne en `npm run dev` sur le poste du présentateur, et chaque PR
-se teste dans la VM GitHub Codespaces (bouton « Tester » du ticket).
+Hébergement : Vercel (production sur `main`, https://saegup-site.vercel.app). Chaque PR se teste
+dans la VM GitHub Codespaces (bouton « Tester » du ticket).
 
 ## Architecture
 
@@ -26,10 +26,11 @@ se teste dans la VM GitHub Codespaces (bouton « Tester » du ticket).
 | `src/scene/ambiance.ts` | Jour / crépuscule / nuit |
 | `src/ideas/IdeaBanner.tsx` | Bandeau et formulaire d'idée |
 | `src/server/idea.ts` | Idée → ticket ITSM (secret côté serveur) |
-| `vite.config.ts` | Sert `POST /api/idea` depuis le serveur de l'appli |
+| `api/idea.ts` | Fonction Vercel `POST /api/idea` |
+| `vite.config.ts` | Sert la même route `POST /api/idea` en dev (poste, VM de test) |
 | `.devcontainer/` | VM de test GitHub Codespaces (port 5173) |
 
-## Variables d'environnement (`.env.local`, ignoré par git)
+## Variables d'environnement (Vercel ; `.env.local` en dev, ignoré par git)
 
 | Variable | Rôle |
 | --- | --- |

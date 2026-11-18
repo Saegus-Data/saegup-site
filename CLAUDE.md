@@ -2,7 +2,8 @@
 
 Une ville illustrée (SVG plein écran) construite ticket après ticket : chaque idée déposée
 depuis le bandeau devient un ticket ITSM dans AI Studio, puis un élément de la ville.
-Vite + React + TypeScript. Les PR se testent dans la VM GitHub Codespaces (`.devcontainer/`).
+Vite + React + TypeScript, en production sur Vercel (`main`). Les PR se testent dans la VM
+GitHub Codespaces (`.devcontainer/`).
 
 ## Commandes
 - `npm run lint` — ESLint
@@ -64,6 +65,6 @@ S'il contient des branches (`? :`, `if`), ajouter un test pour garder 100 % de c
 
 ## Garde-fous
 - Ne pas toucher : `.devcontainer/`, `vite.config.ts` (seuil de couverture, route `/api/idea`),
-  `eslint.config.js`, `src/server/` (dépôt des tickets), `src/ideas/` (bandeau), sauf demande explicite.
+  `eslint.config.js`, `api/`, `src/server/` (dépôt des tickets), `src/ideas/` (bandeau), sauf demande explicite.
 - Pas de nouvelle dépendance npm : tout se dessine en SVG.
 - Textes en français. Une PR = un ticket.

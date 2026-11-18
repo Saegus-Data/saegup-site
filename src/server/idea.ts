@@ -1,5 +1,5 @@
 /**
- * Côté serveur (middleware `/api/idea` de `vite.config.ts`) : transforme une idée de la page en ticket ITSM d'AI Studio. Le secret ne quitte
+ * Côté serveur (fonction Vercel `api/idea.ts`, et middleware de `vite.config.ts` en dev) : transforme une idée de la page en ticket ITSM d'AI Studio. Le secret ne quitte
  * jamais le serveur.
  *
  * Variables : `ITSM_INTAKE_URL` (POST /api/itsm/reports d'AI Studio),
