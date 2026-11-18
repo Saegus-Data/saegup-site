@@ -33,7 +33,7 @@ Le but : un changement **visible au premier coup d'œil** sur la scène, et rien
    const element: CityElement = {
      id: 'fusee',
      nom: 'La fusée',                 // affiché dans la carte « Dernier ajout »
-     layer: 'ciel',                   // ciel | fond | ville | rue | premier-plan
+     layer: 'ville',                  // ciel | fond | ville | rue | premier-plan (voir étape 2)
      ajouteLe: '2026-11-26T19:05:00', // date-heure ACTUELLE : l'élément le plus récent est mis en avant
      ticket: 'BUG-0042',              // référence du ticket ITSM
      proposePar: 'Léa',               // prénom indiqué dans le ticket (ou 'Anonyme')
@@ -43,12 +43,26 @@ Le but : un changement **visible au premier coup d'œil** sur la scène, et rien
    ```
 
 2. **Dessiner en SVG** dans le repère de la scène : 1600 × 900, sol à y = 720, avenue de 740
-   à 830, trottoir avant de 830 à 900. Centre de la tour Saegus : x = 800, sommet y = 190.
+   à 830, trottoir avant de 830 à 900. Centre de la tour Saegus : x = 800, sommet y = 190 ;
+   toits des immeubles entre y = 320 et 480.
    Faire **grand et coloré** (la scène est projetée sur un écran) ; ne pas masquer la tour.
-   ⚠️ Les plans se superposent dans l'ordre `ciel → fond → ville → rue → premier-plan` :
-   un objet du plan `ciel` est **caché derrière les bâtiments**. Tout ce qui est posé sur un
-   bâtiment ou passe devant (fusée sur le toit, enseigne, grue…) va en `ville` ou au-delà ;
-   `ciel` ne sert qu'à ce qui reste dans le ciel libre (y < 180, ou entre les tours).
+
+   ⚠️ **Zone toujours visible : y ≥ 280.** La scène remplit l'écran en étant recadrée **par le
+   haut** dès que l'écran est plus large que 16:9 (cas courant : barre du navigateur, portable,
+   écran large) : jusqu'à ~260 unités disparaissent en haut. Le haut est aussi couvert par
+   l'encart « Saegus City » (en haut à gauche) et la carte « Dernier ajout » (en haut à droite).
+   Donc :
+   - l'objet demandé par le ticket doit tenir **entièrement entre y = 280 et y = 900** (pour une
+     animation : sur toute sa trajectoire) ; y < 280 = décor facultatif seulement ;
+   - un objet volant (montgolfière, dirigeable, oiseaux…) vole **entre y = 280 et 480**, donc
+     devant les immeubles : plan `ville` (ou plus) ;
+   - un objet posé sur la tour (fusée, enseigne…) qui dépasserait y < 280 : l'agrandir vers le
+     bas ou le placer sur un immeuble plus bas plutôt que de le hisser hors champ.
+
+   Les plans se superposent dans l'ordre `ciel → fond → ville → rue → premier-plan` : un objet
+   du plan `ciel` est **caché derrière les bâtiments**, et la zone de ciel libre est presque
+   entièrement hors champ. `ciel` ne sert qu'au décor de fond (ex. ambiance), pas à l'objet
+   demandé par un ticket.
 3. **Animer** si l'idée s'y prête : ajouter un `@keyframes` + une classe `anim-<id>` dans
    `src/App.css` (section « Scène »). Les animations sont coupées en `prefers-reduced-motion`.
 4. **Couleurs** : uniquement `P.*` (`src/scene/palette.ts`) via `style={{ fill: … }}`, jamais
@@ -62,6 +76,8 @@ Le but : un changement **visible au premier coup d'œil** sur la scène, et rien
 Les tests génériques (`src/scene/registry.test.tsx`, `src/App.test.tsx`) vérifient et rendent
 chaque élément : un nouvel élément sans logique conditionnelle n'a pas besoin de test dédié.
 S'il contient des branches (`? :`, `if`), ajouter un test pour garder 100 % de couverture.
+Un test dédié se place **hors de** `elements/` (ex. `src/scene/<id>.test.tsx`) : tout fichier
+`.tsx` de `elements/` est chargé comme un élément de la ville.
 
 ## Garde-fous
 - Ne pas toucher : `.devcontainer/`, `vite.config.ts` (seuil de couverture, route `/api/idea`),
