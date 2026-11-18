@@ -1,0 +1,7 @@
+{
+  "id": "autostart",
+  "version": "1.0.0",
+  "name": "Démarrage automatique de l'application (VM de test)",
+  "description": "Lance un superviseur au démarrage du conteneur : l'application démarre sans qu'on ouvre VS Code (bouton « Tester » d'AI Studio). Les processus lancés par postStartCommand sont tués par Codespaces à la fin de la commande ; ceux du point d'entrée du conteneur, non.",
+  "entrypoint": "/usr/local/share/app-autostart/entrypoint.sh"
+}

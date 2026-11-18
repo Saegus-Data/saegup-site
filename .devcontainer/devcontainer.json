@@ -1,0 +1,28 @@
+// VM de test jetable (GitHub Codespaces) : la ville tourne sur la branche ouverte.
+// Ouverte depuis le bouton « Tester » d'un ticket ITSM d'AI Studio (ADR-008 du Vibe Office),
+// ou depuis GitHub (Code → Codespaces). Aucun secret : le bandeau d'idées y répond « non branché ».
+{
+  "name": "Saegus City — test",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "features": {
+    // Démarrage automatique de l'application, sans VS Code (bouton « Tester »).
+    "./autostart": {}
+  },
+
+  // Création : dépendances, puis marqueur « prêt » lu par le superviseur.
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  // Si on ouvre VS Code : le journal du serveur, dans un terminal visible.
+  "postAttachCommand": "bash .devcontainer/start.sh",
+
+  // Premier port = port de l'application, lu par AI Studio.
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": { "label": "Saegus City", "onAutoForward": "openBrowser" }
+  },
+
+  "hostRequirements": { "cpus": 2 },
+
+  "customizations": {
+    "codespaces": { "openFiles": [".devcontainer/README.md"] }
+  }
+}

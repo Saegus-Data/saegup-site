@@ -1,48 +1,48 @@
-import { useState } from 'react';
-import { AGENDA, EVENT, seatsLeft } from './event';
+import { EVENT } from './event';
+import { IdeaBanner } from './ideas/IdeaBanner';
+import { CityScene } from './scene/CityScene';
+import { contributorCount, ELEMENTS, newestElement } from './scene/registry';
+import type { CityElement } from './scene/types';
 
-const CAPACITY = 120;
-const ALREADY_REGISTERED = 87;
-
-export default function App() {
-  const [registered, setRegistered] = useState(false);
-  const left = seatsLeft(CAPACITY, ALREADY_REGISTERED + (registered ? 1 : 0));
+export default function App({ elements = ELEMENTS }: { elements?: CityElement[] }) {
+  // Seuls les éléments nés d'un ticket sont mis en avant : la ville de départ reste neutre.
+  const newest = newestElement(elements.filter((e) => e.ticket));
+  const contributors = contributorCount(elements);
 
   return (
     <main className="page">
-      <header className="hero">
-        <p className="eyebrow">{EVENT.edition}</p>
-        <h1>
-          {EVENT.name}
-          <span className="dot">.</span>
-        </h1>
-        <p className="lead">
-          {EVENT.date} · {EVENT.hours} · {EVENT.place}
-        </p>
+      <CityScene elements={elements} newestId={newest?.id} />
 
-        {registered ? (
-          <p className="confirm" role="status">
-            Merci, à jeudi ! 🎉
-          </p>
-        ) : (
-          <button type="button" className="cta" onClick={() => setRegistered(true)}>
-            Je m'inscris au Saegup
-          </button>
-        )}
-        <p className="seats">{left} places restantes</p>
+      <header className="hud">
+        <p className="eyebrow">
+          {EVENT.name} · {EVENT.edition}
+        </p>
+        <h1>
+          Saegus City<span className="dot">.</span>
+        </h1>
+        <p className="stats">
+          {elements.length} éléments · {contributors} {contributors > 1 ? 'contributeurs' : 'contributeur'}
+        </p>
       </header>
 
-      <section className="agenda" aria-label="Programme">
-        <h2>Programme</h2>
-        <ol>
-          {AGENDA.map((item) => (
-            <li key={item.time}>
-              <span className="time">{item.time}</span>
-              <span>{item.title}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
+      {newest ? (
+        <aside className="latest" aria-label="Dernier ajout" key={newest.id}>
+          <p className="latest-label">Dernier ajout</p>
+          <p className="latest-name">{newest.nom}</p>
+          <p className="latest-meta">
+            {newest.ticket}
+            {newest.proposePar && <> · proposé par {newest.proposePar}</>}
+          </p>
+        </aside>
+      ) : (
+        <aside className="latest" aria-label="Dernier ajout">
+          <p className="latest-label">Ville de départ</p>
+          <p className="latest-name">À vous de construire</p>
+          <p className="latest-meta">La première idée apparaîtra ici.</p>
+        </aside>
+      )}
+
+      <IdeaBanner />
     </main>
   );
 }

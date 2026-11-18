@@ -1,27 +1,59 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from './App';
-import { seatsLeft } from './event';
+import { CityScene } from './scene/CityScene';
+import { ELEMENTS } from './scene/registry';
+import type { CityElement } from './scene/types';
 
-describe('App', () => {
-  it("affiche le bouton d'inscription et le programme", () => {
-    render(<App />);
-    expect(screen.getByRole('button', { name: "Je m'inscris au Saegup" })).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'Programme' })).toBeInTheDocument();
-    expect(screen.getByText('33 places restantes')).toBeInTheDocument();
-  });
-
-  it("confirme l'inscription et décompte une place", async () => {
-    render(<App />);
-    await userEvent.click(screen.getByRole('button', { name: "Je m'inscris au Saegup" }));
-    expect(screen.getByRole('status')).toHaveTextContent('Merci, à jeudi !');
-    expect(screen.getByText('32 places restantes')).toBeInTheDocument();
-  });
+const el = (over: Partial<CityElement>): CityElement => ({
+  id: 'x',
+  nom: 'X',
+  layer: 'ville',
+  ajouteLe: '2026-11-01T09:00:00',
+  Component: () => <rect />,
+  ...over,
 });
 
-describe('seatsLeft', () => {
-  it('ne descend jamais sous zéro', () => {
-    expect(seatsLeft(10, 3)).toBe(7);
-    expect(seatsLeft(10, 12)).toBe(0);
+describe('App', () => {
+  it('dessine toute la ville, son compteur et le bandeau', () => {
+    const { container } = render(<App />);
+    expect(screen.getByRole('heading', { name: /Saegus City/ })).toBeInTheDocument();
+    expect(screen.getByText(`${ELEMENTS.length} éléments`, { exact: false })).toBeInTheDocument();
+    for (const e of ELEMENTS) expect(container.querySelector(`[data-element="${e.id}"]`)).not.toBeNull();
+    expect(screen.getByRole('region', { name: 'Proposer une idée' })).toBeInTheDocument();
+  });
+
+  it("met en avant le dernier ajout et son ticket", () => {
+    const { container } = render(
+      <App
+        elements={[
+          el({ id: 'tour' }),
+          el({ id: 'fusee', nom: 'La fusée', ajouteLe: '2026-11-26T19:00:00', ticket: 'BUG-0042', proposePar: 'Léa' }),
+          el({ id: 'ballon', proposePar: 'Tom' }),
+        ]}
+      />,
+    );
+    const latest = screen.getByRole('complementary', { name: 'Dernier ajout' });
+    expect(latest).toHaveTextContent('La fusée');
+    expect(latest).toHaveTextContent('BUG-0042 · proposé par Léa');
+    expect(screen.getByText('3 éléments · 2 contributeurs')).toBeInTheDocument();
+    expect(container.querySelector('[data-element="fusee"]')).toHaveClass('is-new');
+    expect(container.querySelector('[data-element="tour"]')).not.toHaveClass('is-new');
+  });
+
+  it('ville de départ : rien de mis en avant, on invite à construire', () => {
+    const { container } = render(<App elements={[el({ id: 'tour', nom: 'La tour' })]} />);
+    expect(screen.getByRole('complementary', { name: 'Dernier ajout' })).toHaveTextContent('À vous de construire');
+    expect(screen.getByText('1 éléments · 0 contributeur')).toBeInTheDocument();
+    expect(container.querySelector('.is-new')).toBeNull();
+  });
+
+  it('ticket sans prénom : seule la référence est affichée', () => {
+    render(<App elements={[el({ id: 'neige', nom: 'La neige', ticket: 'BUG-0043' })]} />);
+    expect(screen.getByRole('complementary', { name: 'Dernier ajout' })).toHaveTextContent(/BUG-0043$/);
+  });
+
+  it("le ciel suit l'ambiance", () => {
+    const { container } = render(<CityScene elements={[]} ambiance="nuit" />);
+    expect(container.querySelector('svg')).toHaveAttribute('data-ambiance', 'nuit');
   });
 });

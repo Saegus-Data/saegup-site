@@ -11,6 +11,21 @@
   --ciel: #5acbf0;
   --jaune: #fde53c;
 
+  /* Scène : ciel selon l'ambiance (src/scene/ambiance.ts) */
+  --ciel-jour-haut: #5acbf0;
+  --ciel-jour-bas: #ebe5fe;
+  --ciel-crepuscule-haut: #5723f3;
+  --ciel-crepuscule-bas: #f26b43;
+  --ciel-nuit-haut: #120a28;
+  --ciel-nuit-bas: #23134d;
+
+  /* Scène : matières */
+  --feuillage: #3fbf8f;
+  --feuillage-sombre: #2a9a72;
+  --bitume: #3a3352;
+  --trottoir: #ccc9d3;
+  --fenetre: #fde53c;
+
   /* Bouton d'appel à l'action principal */
   --cta-bg: var(--violet);
   --cta-bg-hover: var(--navy);
